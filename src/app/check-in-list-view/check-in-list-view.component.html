@@ -1,0 +1,51 @@
+<div class="checkins-container">
+    <mat-card>
+        <div class="checkins-header">
+            <div class="checkins-title">
+                Number of Check-Ins: {{ checkIns.length }}
+                <button mat-stroked-button class="remove-all" color="primary" (click)="removeAllCheckIns.emit()">
+                    Remove All
+                </button>
+            </div>
+
+            <!--Style Filter Chips-->
+            <div class="style-filters">
+                <mat-chip-listbox (change)="doFilter($event)" aria-label="style selection">
+                    <div class="style-flex">
+                        <span>Filter by:</span> <mat-chip-option *ngFor="let style of servingStyles">{{ style }}</mat-chip-option>
+                    </div>
+                </mat-chip-listbox>
+            </div>
+            <mat-divider></mat-divider>
+        </div>
+
+        <!--List of Checkins-->
+        <div class="checkins-list" *ngIf="visibleCheckInList.length; else elseListBlock">
+            <div *ngFor="let checkIn of visibleCheckInList">
+                <mat-action-list>
+                    <div class="flex-box">
+                        <button mat-list-item class="checkin-item" (click)="selectCheckIn.emit(checkIn)">
+                            <b>Name:</b> {{ checkIn.brewery }} {{ checkIn.beerName }}
+                            <div>
+                                <b>Rating:</b> {{ checkIn.rating }}
+                            </div>
+                            <div>
+                                <b>Style:</b> {{ checkIn.servingStyle }}
+                            </div>
+                        </button>
+                        <button class="remove" mat-button (click)="deleteCheckIn.emit(checkIn)">
+                            <mat-icon>delete</mat-icon>
+                        </button>
+                    </div>
+                </mat-action-list>
+                <mat-divider></mat-divider>
+            </div>
+        </div>
+        <ng-template #elseListBlock>
+            <p class="else-list-block-text">
+                No Check-Ins <span><mat-icon>mood_bad</mat-icon></span>
+            </p>
+        </ng-template>
+    </mat-card>
+</div>
+

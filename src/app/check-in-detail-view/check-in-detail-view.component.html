@@ -1,0 +1,104 @@
+<div class="edit-add-checkin-container">
+    <mat-card>
+        <div class="checkin-form">
+            <div class="edit-add-form-title">
+                <div *ngIf="selectedCheckIn.id; else elseBlock">
+                    Edit Check-In
+                </div>
+                <ng-template #elseBlock>
+                    Create New Check-In
+                </ng-template>
+            </div>
+            <mat-divider></mat-divider>
+            <form>
+                <table class="flex-table">
+                    <tr>
+                        <td>
+                            <!--Brewery Name-->
+                            <mat-form-field class="brewery-name-input">
+                                <mat-label>Brewery</mat-label>
+                                <input matInput [(ngModel)]="selectedCheckIn.brewery" name="brewery">
+                            </mat-form-field>
+                        </td>
+                        <td>
+                            <!--Beer Name-->
+                            <mat-form-field class="beer-name-input">
+                                <mat-label>Beer Name</mat-label>
+                                <input matInput [(ngModel)]="selectedCheckIn.beerName" name="beer-name">
+                            </mat-form-field>
+                        </td>
+                    </tr>
+                </table>
+
+                <!--Serving Style-->
+                <div class="radio-buttons">
+                    <label for="style">Style: </label>
+                    <mat-radio-group
+                            color="primary"
+                            id="style"
+                            aria-label="Serving Style"
+                            [(ngModel)]="selectedCheckIn.servingStyle"
+                            name="style"
+                    >
+                        @for (servingStyle of servingStyles; track servingStyle) {
+                            <mat-radio-button class="radio-button" [value]="servingStyle">{{ servingStyle }}
+                            </mat-radio-button>
+                        }
+                    </mat-radio-group>
+                </div>
+
+                <!--Beer Type Dropdown-->
+                <div class="beer-type-select">
+                    <mat-form-field>
+                        <mat-label>Beer Type</mat-label>
+                        <mat-select [(value)]="selectedCheckIn.beerType" [compareWith]="isSameBeerType">
+                            @for (beerType of beerTypes; track beerType) {
+                                <mat-option [value]="beerType">{{ beerType }}</mat-option>
+                            }
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+
+                <!--Rating-->
+                <div class="radio-buttons">
+                    <label for="rating">Rating: </label>
+                    <mat-radio-group
+                            color="primary"
+                            id="rating"
+                            aria-label="rating"
+                            [(ngModel)]="selectedCheckIn.rating"
+                            name="rating"
+                    >
+                        @for (rating of ratings; track rating) {
+                            <mat-radio-button class="radio-button" [value]="rating">{{ rating }}</mat-radio-button>
+                        }
+                    </mat-radio-group>
+                </div>
+
+                <!--Review Section-->
+                <div class="review-text-area">
+                    <mat-form-field>
+                        <mat-label>How was it?</mat-label>
+                        <textarea
+                                matInput
+                                name="review"
+                                [(ngModel)]="selectedCheckIn.review"
+                                [value]="selectedCheckIn.review || '' "
+                        >
+                        </textarea>
+                    </mat-form-field>
+                </div>
+            </form>
+            <div class="spacer"></div>
+
+            <!--Add/Edit button-->
+            <button mat-stroked-button color="primary"
+                    (click)="selectedCheckIn.id ? editCheckIn.emit(selectedCheckIn) : addCheckIn.emit(selectedCheckIn)
+                      " [disabled]="isButtonDisabled"
+            >
+                {{ selectedCheckIn.id ? 'Edit' : 'Add' }} Check-In
+            </button>
+        </div>
+    </mat-card>
+</div>
+
