@@ -38,20 +38,20 @@
     </mat-drawer>
     <div class="flex-container">
         <app-check-in-list-view
-                [checkIns]="checkIns"
+                [checkIns]="checkInService.checkIns"
                 [servingStyles]="servingStyles"
-                (selectCheckIn)="selectCheckIn($event)"
-                (deleteCheckIn)="deleteCheckIn($event)"
-                (removeAllCheckIns)="removeAllCheckIns()"
+                (selectCheckIn)="checkInService.selectCheckIn($event)"
+                (deleteCheckIn)="checkInService.deleteCheckIn($event)"
+                (removeAllCheckIns)="checkInService.removeAllCheckIns()"
         >
         </app-check-in-list-view>
         <app-check-in-detail-view
-                [selectedCheckIn]="selectedCheckIn"
+                [selectedCheckIn]="checkInService.selectedCheckIn"
                 [servingStyles]="servingStyles"
                 [beerTypes]="beerTypes"
                 [ratings]="ratings"
-                (addCheckIn)="addCheckIn($event)"
-                (editCheckIn)="editCheckIn($event)"
+                (addCheckIn)="checkInService.addCheckIn($event)"
+                (editCheckIn)="checkInService.editCheckIn($event)"
         >
         </app-check-in-detail-view>
     </div>

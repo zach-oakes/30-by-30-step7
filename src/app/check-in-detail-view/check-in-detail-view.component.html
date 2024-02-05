@@ -40,10 +40,9 @@
                             [(ngModel)]="selectedCheckIn.servingStyle"
                             name="style"
                     >
-                        @for (servingStyle of servingStyles; track servingStyle) {
-                            <mat-radio-button class="radio-button" [value]="servingStyle">{{ servingStyle }}
-                            </mat-radio-button>
-                        }
+                        <mat-radio-button *ngFor="let servingStyle of servingStyles" class="radio-button" [value]="servingStyle">
+                            {{ servingStyle }}
+                        </mat-radio-button>
                     </mat-radio-group>
                 </div>
 
@@ -52,9 +51,7 @@
                     <mat-form-field>
                         <mat-label>Beer Type</mat-label>
                         <mat-select [(value)]="selectedCheckIn.beerType" [compareWith]="isSameBeerType">
-                            @for (beerType of beerTypes; track beerType) {
-                                <mat-option [value]="beerType">{{ beerType }}</mat-option>
-                            }
+                            <mat-option *ngFor="let beerType of beerTypes" [value]="beerType">{{ beerType }}</mat-option>
                         </mat-select>
                     </mat-form-field>
                 </div>
@@ -69,9 +66,10 @@
                             [(ngModel)]="selectedCheckIn.rating"
                             name="rating"
                     >
-                        @for (rating of ratings; track rating) {
-                            <mat-radio-button class="radio-button" [value]="rating">{{ rating }}</mat-radio-button>
-                        }
+                        <mat-radio-button *ngFor="let rating of ratings" class="radio-button" [value]="rating">
+                            {{ rating }}
+                        </mat-radio-button>
+
                     </mat-radio-group>
                 </div>
 
