@@ -1,0 +1,28 @@
+.checkin-form {
+    border-style: solid;
+    padding: .5rem;
+    height: 70vh;
+    border-radius: .5rem;
+}
+
+.radio-buttons {
+    margin-bottom: .625rem;
+}
+
+.flex-table {
+    display: flex;
+    justify-content: space-between;
+    margin-top: .625rem
+}
+
+.edit-add-form-title {
+    font-size: x-large;
+    margin-bottom: 1rem;
+    margin-left: .5rem;
+}
+
+.edit-add-checkin-container {
+    margin-top: 1.5rem;
+    height: 60vh;
+    flex: 1 1 0;
+}

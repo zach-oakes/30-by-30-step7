@@ -1,0 +1,58 @@
+<mat-toolbar color="primary" class="top-nav">
+    <div class="sidenav-content">
+        <button type="button" mat-button class="menu-button" (click)="drawer.toggle()">
+            <mat-icon>menu</mat-icon>
+        </button>
+    </div>
+    <span class="app-title">
+        Craft Beer Tracker
+        <mat-icon class="icon">sports_bar</mat-icon>
+    </span>
+    <button mat-button [matMenuTriggerFor]="menu" aria-label="profile-button">
+        <mat-icon>account_circle</mat-icon>
+    </button>
+
+    <!--Logout Button-->
+    <mat-menu #menu="matMenu">
+        <button [routerLink]="'/login'" class="logout-button" mat-menu-item>Logout</button>
+    </mat-menu>
+</mat-toolbar>
+
+<mat-drawer-container class="main-container" autosize>
+    <mat-drawer #drawer class="sidenav" mode="side">
+
+        <!--Drawer Icons-->
+        <div class="home-button">
+            <button mat-icon-button color="primary" aria-label="home icon">
+                <mat-icon>home</mat-icon>
+            </button>
+            <p>Home</p>
+        </div>
+        <div class="spacer"></div>
+        <div class="checkins-button">
+            <button mat-icon-button color="primary" aria-label="checkins icon">
+                <mat-icon>list</mat-icon>
+            </button>
+            <p>Check-ins</p>
+        </div>
+    </mat-drawer>
+    <div class="flex-container">
+        <app-check-in-list-view
+                [checkIns]="checkInService.checkIns"
+                [servingStyles]="servingStyles"
+                (selectCheckIn)="checkInService.selectCheckIn($event)"
+                (deleteCheckIn)="checkInService.deleteCheckIn($event)"
+                (removeAllCheckIns)="checkInService.removeAllCheckIns()"
+        >
+        </app-check-in-list-view>
+        <app-check-in-detail-view
+                [selectedCheckIn]="checkInService.selectedCheckIn"
+                [servingStyles]="servingStyles"
+                [beerTypes]="beerTypes"
+                [ratings]="ratings"
+                (addCheckIn)="checkInService.addCheckIn($event)"
+                (editCheckIn)="checkInService.editCheckIn($event)"
+        >
+        </app-check-in-detail-view>
+    </div>
+</mat-drawer-container>
